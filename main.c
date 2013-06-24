@@ -62,10 +62,10 @@ struct Star {
 };
 
 #define PLANETS_NUMBER 5
-struct SolarSystem {
+typedef struct {
 	struct Planet1 planets[PLANETS_NUMBER];
 	struct Star star;
-};
+} SolarSystem;
 
 typedef struct Ship_s Ship;
 typedef struct PlanetSurface_s Planet;
@@ -78,7 +78,7 @@ struct Game {
 	int timer;
 };
 
-void generate_solar_system(struct SolarSystem *solar_system)
+void generate_solar_system(SolarSystem *solar_system)
 {
 	solar_system->star.x = SCREEN_WIDTH/2;
 	solar_system->star.y = SCREEN_HEIGHT/2;
@@ -179,7 +179,7 @@ void draw_circle(float r, float x, float y)
 	}
 	glEnd();
 }
-void draw_solar_system(struct SolarSystem* solar_system)
+void draw_solar_system(SolarSystem* solar_system)
 {
 	draw_circle(solar_system->star.radius, solar_system->star.x, solar_system->star.y);
 	for (int i=0; i<PLANETS_NUMBER; i++) {
@@ -299,7 +299,7 @@ int calculate_world(Ship *ship, Planet *planet)
 	}
 	return 0;
 }
-void calculate_world_stage1(Ship *ship, struct SolarSystem * solar_system)
+void calculate_world_stage1(Ship *ship, SolarSystem *solar_system)
 {
 	if (ship->destroyed) {
 		for (int i=0; i<particles_of_destroyed_ship; i++) {
@@ -398,7 +398,7 @@ int main( int argc, char* args[] )
 	//-----------------main loop----------------
 	Ship ship;
 	Planet planet;
-	struct SolarSystem solar_system;
+	SolarSystem solar_system;
 	struct Game game;
 
 	int exit = 0;
